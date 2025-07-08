@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  admin
+  employee
+}
+
+enum StatusEmployee {
+  active
+  inactive
+}
+
+model Employee {
+  id            String         @id @default(uuid())
+  name          String
+  email         String         @unique
+  password      String
+  whatsapp      String?
+  role          Role           @default(employee)
+  status        StatusEmployee @default(active)
+  emailVerified Boolean        @default(false) @map("email_verified ")
+  createdAt     DateTime       @default(now()) @map("created_at")
+  updatedAt     DateTime       @updatedAt @map("updated_at")
+}

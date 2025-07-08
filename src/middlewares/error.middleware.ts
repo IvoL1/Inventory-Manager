@@ -9,7 +9,6 @@ export function errorMiddleware(
   next: NextFunction
 ) {
   if (err instanceof ZodError) {
-    console.error('Error Caught by ZodError');
     res.status(400).json({
       success: false,
       message: 'Error in data validation',
@@ -22,7 +21,6 @@ export function errorMiddleware(
   }
 
   if (err instanceof AppError) {
-    console.error('Error Caught by ApiError');
     res.status(err.statusCode).json({
       success: false,
       message: err.message,
@@ -34,6 +32,4 @@ export function errorMiddleware(
     success: false,
     error: 'Internal server error',
   });
-
-  return;
 }
