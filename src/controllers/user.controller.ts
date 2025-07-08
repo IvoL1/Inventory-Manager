@@ -2,9 +2,9 @@ import type { Request, Response } from 'express';
 import userService from '../services/user.service';
 
 class UserController {
-  index(req: Request, res: Response) {
-    const response = userService.create(req.body);
-    res.json(req.body);
+  async create(req: Request, res: Response) {
+    const response = await userService.createUser(req.body);
+    res.json(response);
   }
 }
 
